@@ -10,7 +10,9 @@
 
 const pokedex = document.getElementById('pokedex');
 
-/* Fetches Pokemon data */
+/**
+ * Fetches Pokemon data
+ */
 const fetchPokemon = async () => {
     const url = `https://pokeapi.co/api/v2/pokemon/`;
     const res = await fetch(url);
@@ -24,7 +26,10 @@ const fetchPokemon = async () => {
     displayPokemon(pokemon);
 };
 
-/* Displays Pokemon data */
+/**
+ * Displays Pokemon card
+ * @param pokemon Pokemon information
+ */
 const displayPokemon = (pokemon) => {
     const pokemonHTMLString = pokemon
         .map(
@@ -39,7 +44,10 @@ const displayPokemon = (pokemon) => {
     pokedex.innerHTML = pokemonHTMLString;
 };
 
-/* Displays selcted Pokemon */
+/**
+ * Selects Pokemon 
+ * @param id Pokemon API id
+ */
 const selectPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
@@ -47,7 +55,10 @@ const selectPokemon = async (id) => {
     displayPopup(pokeman);
 };
 
-/* Displays Popup */
+/**
+ * Displays Popup card
+ * @param pokeman Pokemon information
+ */
 const displayPopup = (pokeman) => {
     const type = pokeman.types.map((type) => type.type.name).join(', ');
     const image = pokeman.sprites['front_default'];
@@ -65,7 +76,9 @@ const displayPopup = (pokeman) => {
     console.log(htmlString);
 };
 
-/* Closes Popup */
+/**
+ * Closes Popup card
+ */
 const closePopup = () => {
     const popup = document.querySelector('.popup');
     popup.parentElement.removeChild(popup);
