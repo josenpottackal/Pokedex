@@ -93,6 +93,9 @@ body {
   height: 180px;
 }
 
+/**
+ * Bounce animation
+ */
 @keyframes bounce {
   20% {
       transform: translateY(-6px);
@@ -139,4 +142,3 @@ body {
   transform: translateY(-1px);
   box-shadow: 0px 1px 2px #0082e6;
 }
-
