@@ -1,0 +1,71 @@
+<!-- 
+    File Name: About.html 
+    Purpose: Describes the function of the Pokédex
+    Date: 2020-03-12
+    Last modified: 2020-03-12
+    Author: Josen Pottackal
+    Copy right no copyright
+    Version: 1.0 
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Pokédex</title>
+        <link rel="stylesheet" href="About.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Rubik&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <body>
+        <script>
+            // Functions to link current html files to other html files
+            function redirectHome() {
+                window.location = "./Home.html"
+            }
+
+            function redirectAbout() {
+                window.location = "./About.html"
+            }
+
+            function redirectPokemon() {
+                window.location = "./Pokemon.html"
+            }
+
+            function redirectFavourites() {
+                window.location = "./Favourites.html"
+            }
+
+            function redirectCompare() {
+                window.location = "./Compare.html"
+            }
+        </script>
+
+        <div class="navbar">
+            <label class="logo">Pokédex</label>
+            <button class="button" onclick="redirectCompare();">Compare</button>
+            <button class="button" onclick="redirectFavourites();">Favourites</button>
+            <button class="button" onclick="redirectPokemon();">Pokémon</button>
+            <button class="button" onclick="redirectAbout();">About</button>
+            <button class="button" onclick="redirectHome();">Home</button>
+        </div>
+        
+        <div class="main">
+            <h1>About</h1>
+            <p>The Pokédex is a digital encyclopaedia created by Professor Oak as an invaluable tool to Trainers in the Pokémon world. </p>
+            <p>It gives information about all Pokémon in the world that are contained in its database.</p>
+        </div>
+    </body>
+</html>
