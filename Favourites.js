@@ -9,13 +9,13 @@
 */
 
 const pokedex = document.getElementById('pokedex');
-const favouritesList = new Array();
+var favouritesList; //let?
 
 const displayFavourites = () => {
     // Check browser support
     if (typeof(Storage) !== "undefined") {
         if (localStorage !== null) {
-            var retrievedData = localStorage.getItem("favouritePokemon");
+            var retrievedData = localStorage.getItem("favouritePokemon")|| "[]";
             favouritesList = JSON.parse(retrievedData);
             
             for (i = 0; i < favouritesList.length; i++) {
@@ -76,8 +76,8 @@ const displayPopup = (pokeman) => {
             <h2 class="cardTitle">${pokeman.name}</h2>
         </div>
     </div>`;
-    localStorage.setItem("favouritePokemon", JSON.stringify(localStorage));
     favouritesList.push(htmlString);
+    localStorage.setItem("favouritePokemon", JSON.stringify(favouritesList));
     favourite.innerHTML = htmlString + favourite.innerHTML;
 };
 
