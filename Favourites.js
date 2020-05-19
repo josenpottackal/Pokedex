@@ -12,8 +12,18 @@ const pokedex = document.getElementById('pokedex');
 const favouritesList = new Array();
 
 const displayFavourites = () => {
-    for (i = 0; i < favouritesList.length; i++) {
-        favourite.innerHTML = favouritesList[i] + favourite.innerHTML;
+    // Check browser support
+    if (typeof(Storage) !== "undefined") {
+        if (localStorage !== null) {
+            var retrievedData = localStorage.getItem("favouritePokemon");
+            favouritesList = JSON.parse(retrievedData);
+            
+            for (i = 0; i < favouritesList.length; i++) {
+                favourite.innerHTML = favouritesList[i] + favourite.innerHTML;
+            }
+        }
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
 }
 
@@ -66,6 +76,7 @@ const displayPopup = (pokeman) => {
             <h2 class="cardTitle">${pokeman.name}</h2>
         </div>
     </div>`;
+    localStorage.setItem("favouritePokemon", JSON.stringify(localStorage));
     favouritesList.push(htmlString);
     favourite.innerHTML = htmlString + favourite.innerHTML;
 };
