@@ -9,10 +9,15 @@
 */
 
 const pokedex = document.getElementById('pokedex');
+const favouritesList = new Array();
 
-/**
- * Fetches Pokemon data
- */
+const displayFavourites = () => {
+    for (i = 0; i < favouritesList.length; i++) {
+        favourite.innerHTML = favouritesList[i] + favourite.innerHTML;
+    }
+}
+
+/* Fetches Pokemon data */
 const fetchPokemon = async () => {
     const url = `https://pokeapi.co/api/v2/pokemon/`;
     const res = await fetch(url);
@@ -26,10 +31,7 @@ const fetchPokemon = async () => {
     displayPokemon(pokemon);
 };
 
-/**
- * Displays Pokemon card
- * @param pokemon Pokemon information
- */
+/* Displays Pokemon data */
 const displayPokemon = (pokemon) => {
     const pokemonHTMLString = pokemon
         .map(
@@ -43,10 +45,7 @@ const displayPokemon = (pokemon) => {
     pokedex.innerHTML = pokemonHTMLString;
 };
 
-/**
- * Selects Pokemon 
- * @param id Pokemon API id
- */
+/* Displays selcted Pokemon */
 const selectPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
@@ -54,10 +53,7 @@ const selectPokemon = async (id) => {
     displayPopup(pokeman);
 };
 
-/**
- * Displays Popup card
- * @param pokeman Pokemon information
- */
+/* Displays Popup */
 const displayPopup = (pokeman) => {
     const type = pokeman.types.map((type) => type.type.name).join(', ');
     const image = pokeman.sprites['front_default'];
@@ -70,15 +66,15 @@ const displayPopup = (pokeman) => {
             <h2 class="cardTitle">${pokeman.name}</h2>
         </div>
     </div>`;
+    favouritesList.push(htmlString);
     favourite.innerHTML = htmlString + favourite.innerHTML;
 };
 
-/**
- * Closes Popup card
- */
+/* Closes Popup */
 const closePopup = () => {
-    const favouriteCard = document.querySelector('.favouriteCard');
+    const favouriteCard = document.querySelector('.favouriteCard');    
     favouriteCard.parentElement.removeChild(favouriteCard);
 };
 
+displayFavourites();
 fetchPokemon();
