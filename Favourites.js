@@ -9,17 +9,19 @@
 */
 
 const pokedex = document.getElementById('pokedex');
-var favouritesList; //let?
+var favouritesList;
 
+/* Displays Favourite pokemon stored in localStorage */
 const displayFavourites = () => {
     // Check browser support
     if (typeof(Storage) !== "undefined") {
+
+        //Checks if localStorge empty
         if (localStorage !== null) {
             var retrievedData = localStorage.getItem("favouritePokemon")|| "[]";
             favouritesList = JSON.parse(retrievedData);
-            
             for (i = 0; i < favouritesList.length; i++) {
-                favourite.innerHTML = favouritesList[i] + favourite.innerHTML;
+                favourite.innerHTML += favouritesList[i];
             }
         }
     } else {
@@ -49,8 +51,7 @@ const displayPokemon = (pokemon) => {
        `<li class="card" onclick="selectPokemon(${pokeman.id})">
             <img class="cardImage" src="${pokeman.image}"/>
             <h2 class="cardTitle">${pokeman.name}</h2>
-        </li>`
-        )
+        </li>`)
         .join('');
     pokedex.innerHTML = pokemonHTMLString;
 };
@@ -63,28 +64,42 @@ const selectPokemon = async (id) => {
     displayPopup(pokeman);
 };
 
-/* Displays Popup */
+/* Displays Popup and adds pokemon to favourites*/
 const displayPopup = (pokeman) => {
     const type = pokeman.types.map((type) => type.type.name).join(', ');
     const image = pokeman.sprites['front_default'];
     const htmlString = 
-    `<div class="favouriteCard">
-        <button class="button button2" onclick="closePopup();">Remove</button>
+    `<div class="favouriteCard${pokeman.id}">
+        <button class="button button2" onclick="closePopup(${pokeman.id});">Remove</button>
         <div class="card">
             <h2 class="favouriteTitle">Favourite:</h2>
             <img class="cardImage" src="${image}"/>
             <h2 class="cardTitle">${pokeman.name}</h2>
         </div>
     </div>`;
+
     favouritesList.push(htmlString);
     localStorage.setItem("favouritePokemon", JSON.stringify(favouritesList));
-    favourite.innerHTML = htmlString + favourite.innerHTML;
-};
+    favourite.innerHTML += htmlString;
+ };
 
-/* Closes Popup */
-const closePopup = () => {
-    const favouriteCard = document.querySelector('.favouriteCard');    
+/* Closes Popup and removes pokemon from favourites*/
+const closePopup = (id) => {
+    // Closes popup
+    const favouriteCard = document.querySelector(`.favouriteCard${id}`);    
     favouriteCard.parentElement.removeChild(favouriteCard);
+    let index;
+
+    // Removes pokemon from favourites
+    for (let i = 0; i < favouritesList.length; i++) {
+        if (favouritesList[i].includes(`favouriteCard${id}`)) {
+            index = i;
+            break;
+        }
+    }
+
+    favouritesList.splice(index, 1);
+    localStorage.setItem("favouritePokemon", JSON.stringify(favouritesList));
 };
 
 displayFavourites();
